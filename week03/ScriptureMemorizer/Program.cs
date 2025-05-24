@@ -2,8 +2,28 @@ using System;
 
 class Program
 {
-    static void Main(string[] args)
+    static void Main()
     {
-        Console.WriteLine("Hello World! This is the ScriptureMemorizer Project.");
+        Reference reference = new Reference("Proverbs", 3, 5, 6);
+        Scripture scripture = new Scripture(reference, 
+            "Trust in the Lord with all thine heart and lean not unto thine own understanding.");
+
+        while (!scripture.AllWordsHidden())
+        {
+            Console.Clear();
+            Console.WriteLine(scripture.GetDisplayText());
+            Console.WriteLine("\nPress Enter to hide more words or type 'quit' to exit:");
+            string input = Console.ReadLine().Trim().ToLower();
+
+            if (input == "quit")
+                return;
+
+            scripture.HideRandomWords(3);
+        }
+
+        Console.Clear();
+        Console.WriteLine(scripture.GetDisplayText());
+        Console.WriteLine("\nAll words hidden. Press any key to exit.");
+        Console.ReadKey();
     }
 }
